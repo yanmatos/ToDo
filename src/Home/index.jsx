@@ -22,6 +22,7 @@ export function Home() {
     };
     setTodoId(todoId + 1)
     setTodoTasks((prevState) => [newTask, ...prevState])
+    setTaskName('')
   }
 
 
@@ -74,7 +75,8 @@ export function Home() {
       <h1 className='todo-title'>To-Do</h1>
       <input type="text" className="todo-input"
         placeholder="Digite sua tarefa aqui"
-        onChange={event => setTaskName(event.target.value)}>
+        onChange={event => setTaskName(event.target.value)}
+        value={taskName}>
       </input>
       <button type='button' className='todo-button'
         onClick={handleAddTask}
