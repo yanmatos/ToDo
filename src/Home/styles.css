@@ -1,0 +1,135 @@
+.todo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.todo-title {
+    margin: 70px 0 25px 0;
+    color: #fff;
+    font-size: 50px;
+    text-align: center;
+}
+
+.todo .todo-input {
+    width: 50%;
+    padding: 20px;
+    background-color: #f6f9ff;
+    border: none;
+    border-radius: 6px;
+}
+
+.todo .todo-button {
+    margin-top: 5px;
+    width: 50%;
+    background-color: #EDB015;
+    padding: 12px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    transition: filter 0.3s;
+    color: #121214;
+
+}
+
+.todo .todo-button:hover {
+    filter: brightness(0.8);
+}
+
+.todo-button svg {
+    fill: #121214;
+}
+
+.card-list {
+    margin-top: 50px;
+    width: 50%;
+}
+
+.card-container {
+    margin-bottom: 10px;
+    width: 100%;
+    background-color: #f6f9ff;
+    padding: 20px;
+    border-radius: 6px;
+    border: none;
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.card-container .card-text-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.card-container .card-text-content strong {
+    font-size: 18px;
+    color: #111;
+}
+
+.card-container .card-text-content small {
+    margin-top: 3px;
+    font-size: 12px;
+    color: #202020;
+}
+
+.functions {
+    display: flex;
+}
+
+.card-container .functions .check-button {
+    cursor: pointer;
+    border: none;
+    background: transparent;
+}
+
+.card-container .functions .check-button svg {
+    padding-top: 3.2px;
+}
+
+.card-container .functions .edit-button {
+    cursor: pointer;
+    border: none;
+    background: transparent;
+}
+
+
+.edit-button:hover {
+    fill: #EDB015;
+}
+
+.card-container .functions .delete-button {
+    cursor: pointer;
+    border: none;
+    background: transparent;
+}
+
+.card-container .functions .delete-button svg {
+    padding-top: 2px;
+}
+
+.delete-button:hover {
+    fill: rgb(247, 28, 28)
+}
+
+#isDone {
+    background-color: #888888;
+    transition: all 0.3s;
+}
+
+#isDone strong {
+    text-decoration: line-through;
+}
+
+#notIsDone {
+    transition: all 0.3s;
+}
+
+#notIsDone .check-button:hover {
+    fill: #55E307;
+}
