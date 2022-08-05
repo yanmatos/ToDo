@@ -1,5 +1,8 @@
 import { useState } from 'react'
 import { Card } from "../components/Card"
+import * as Dialog from '@radix-ui/react-dialog';
+import * as AlertDialog from '@radix-ui/react-alert-dialog';
+
 
 import './styles.css'
 
@@ -8,6 +11,7 @@ export function Home() {
   const [taskName, setTaskName] = useState("")
   const [todoTasks, setTodoTasks] = useState([])
   const [todoId, setTodoId] = useState(0)
+  const [newTaskName, setNewTaskName] = useState('')
 
 
   function handleAddTask() {
@@ -20,6 +24,11 @@ export function Home() {
       }),
       id: todoId
     };
+
+    if (Boolean(taskName) === false) {
+      return
+    }
+
     setTodoId(todoId + 1)
     setTodoTasks((prevState) => [newTask, ...prevState])
     setTaskName('')
@@ -27,7 +36,7 @@ export function Home() {
 
 
   function handleEditTask(name, time, id) {
-    name = window.prompt('Edite a sua tarefa:')
+    name = newTaskName
     time = new Date().toLocaleTimeString("pt-Br", {
       day: "2-digit",
       month: "2-digit",
@@ -55,18 +64,17 @@ export function Home() {
     setTodoTasks(removeId)
     setTodoTasks((prevState) => [editedTask, ...prevState])
     //console.log(todoTasks)
+    setNewTaskName('')
 
 
   }
 
 
   const handleDeleteTask = (id) => {
-    if (window.confirm('Deseja excluir tarefa?')) {
       //console.log(todoTasks)
       var newTaskList = todoTasks.filter((task) => task.id !== id)
       //console.log(newTaskList)
       setTodoTasks(newTaskList)
-    }
   }
 
 
@@ -88,15 +96,46 @@ export function Home() {
             task={task.name}
             time={task.time}
             editTask={
-              <button className='edit-button' onClick={() => handleEditTask(task.name, task.time, task.id)}>
-                <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24"><path d="M5 23.7q-.825 0-1.413-.588Q3 22.525 3 21.7v-14q0-.825.587-1.413Q4.175 5.7 5 5.7h8.925l-2 2H5v14h14v-6.95l2-2v8.95q0 .825-.587 1.412-.588.588-1.413.588Zm7-9Zm4.175-8.425 1.425 1.4-6.6 6.6V15.7h1.4l6.625-6.625 1.425 1.4-7.2 7.225H9v-4.25Zm4.275 4.2-4.275-4.2 2.5-2.5q.6-.6 1.438-.6.837 0 1.412.6l1.4 1.425q.575.575.575 1.4T22.925 8Z" />
-                </svg>
-              </button>}
+              <Dialog.Root>
+                <Dialog.Trigger className='edit-button'>
+                  <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24"><path d="M5 19h1.4l8.625-8.625-1.4-1.4L5 17.6ZM19.3 8.925l-4.25-4.2 1.4-1.4q.575-.575 1.413-.575.837 0 1.412.575l1.4 1.4q.575.575.6 1.388.025.812-.55 1.387ZM17.85 10.4 7.25 21H3v-4.25l10.6-10.6Zm-3.525-.725-.7-.7 1.4 1.4Z" />
+                  </svg>
+                </Dialog.Trigger>
+                <Dialog.Portal>
+                  <Dialog.Overlay className='modal-overlay' />
+                  <Dialog.Content className='modal-content'>
+                    <Dialog.Title className='modal-title'>Edite a Tarefa</Dialog.Title>
+                    <Dialog.Description className='modal-description'>Aqui você pode editar a sua tarefa</Dialog.Description>
+                    <div>
+                      <input
+                        className='modal-input'
+                        placeholder="Digite sua nova tarefa"
+                        onChange={event => setNewTaskName(event.target.value)}
+                        value={newTaskName}
+                      />
+                    </div>
+                    <Dialog.Close className='modal-button' onClick={() => handleEditTask(task.name, task.time, task.id)}>Salvar alterações</Dialog.Close>
+                  </Dialog.Content>
+                </Dialog.Portal>
+              </Dialog.Root>
+            }
             deleteTask={
-              <button className='delete-button' aria-label="Excluir Tarefa" onClick={() => handleDeleteTask(task.id)}>
-                <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24"><path d="M7 21q-.825 0-1.412-.587Q5 19.825 5 19V6H4V4h5V3h6v1h5v2h-1v13q0 .825-.587 1.413Q17.825 21 17 21ZM17 6H7v13h10ZM9 17h2V8H9Zm4 0h2V8h-2ZM7 6v13Z" />
-                </svg>
-              </button>}
+              <AlertDialog.Root>
+                <AlertDialog.Trigger className='delete-button'>
+                  <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24"><path d="M7 21q-.825 0-1.412-.587Q5 19.825 5 19V6H4V4h5V3h6v1h5v2h-1v13q0 .825-.587 1.413Q17.825 21 17 21ZM17 6H7v13h10ZM9 17h2V8H9Zm4 0h2V8h-2ZM7 6v13Z" />
+                  </svg>
+                </AlertDialog.Trigger>
+                <AlertDialog.Portal>
+                  <AlertDialog.Overlay className='modal-overlay' />
+                  <AlertDialog.Content className='modal-content'>
+                    <AlertDialog.Title className='modal-title'>Excluir Tarefa</AlertDialog.Title>
+                    <AlertDialog.Description className='modal-description'>Tem certeza que deseja excluir esta tarefa?</AlertDialog.Description>
+                    <AlertDialog.Action className='modal-button-red' onClick={() => handleDeleteTask(task.id)}>Sim, deletar tarefa</AlertDialog.Action>
+                    <AlertDialog.Cancel className = 'modal-button-gray'>Cancelar</AlertDialog.Cancel>
+                  </AlertDialog.Content>
+                </AlertDialog.Portal>
+              </AlertDialog.Root>
+            }
           />
         )
         )}
@@ -104,4 +143,3 @@ export function Home() {
     </div>
   )
 }
-

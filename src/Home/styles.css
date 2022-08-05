@@ -98,6 +98,9 @@
     background: transparent;
 }
 
+.card-container .functions .edit-button svg {
+    padding-top: 3.2px;
+}
 
 .edit-button:hover {
     fill: #EDB015;
@@ -132,4 +135,86 @@
 
 #notIsDone .check-button:hover {
     fill: #55E307;
+}
+
+
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.modal-content {
+    background-color: #fff;
+    border-radius: 6px;
+    box-shadow: hsl(206 22% 7% / 35%) 0px 10px 38px -10px, hsl(206 22% 7% / 20%) 0px 10px 20px -15px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    padding: 20px;
+
+}
+
+.modal-title {
+    margin-bottom: 10px
+}
+
+.modal-description {
+    margin-bottom: 10px;
+}
+
+.modal-input {
+    padding: 5px;
+}
+
+.modal-button {
+    border: none;
+    background-color: #F9E78C;
+    color: #946800;
+    border-radius: 6px;
+    margin-top: 10px;
+    font-size: 12px;
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+
+}
+
+.modal-button:hover {
+    background-color: #EFD36C;
+}
+
+.modal-button-red{
+    border: none;
+    background-color: #F9C6C6;
+    color: #FF6369;
+    border-radius: 6px;
+    margin-top: 10px;
+    font-size: 12px;
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    margin-right: 10px;
+}
+
+.modal-button-red:hover {
+    background-color: #F3B0A2;
+}
+
+.modal-button-gray{
+    border: none;
+    background-color: #DBDBDB;
+    color: #6F6F6F;
+    border-radius: 6px;
+    margin-top: 10px;
+    font-size: 12px;
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.modal-button-gray:hover {
+    background-color: #C7C7C7;
 }
