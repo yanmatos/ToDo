@@ -1,6 +1,15 @@
 import { useState } from 'react'
 
-export function Card({ task, time, editTask, deleteTask }) {
+
+type CardProps = {
+task: string;
+time: string;
+editTask: any;
+deleteTask: any;
+
+}
+
+export function Card( props: CardProps) {
     const [done, setDone] = useState(false)
 
     function setTaskDone() {
@@ -9,8 +18,8 @@ export function Card({ task, time, editTask, deleteTask }) {
     return (
         <div className='card-container' id={done ? 'isDone' : 'notIsDone'}>
             <div className='card-text-content'>
-                <strong>{task}</strong>
-                <small>{time}</small>
+                <strong>{props.task}</strong>
+                <small>{props.time}</small>
             </div>
             <div className='functions'>
                 <div>
@@ -24,8 +33,8 @@ export function Card({ task, time, editTask, deleteTask }) {
                         </svg>
                     </button>}
                     </div>
-                    {done? '' : <div>{editTask}</div> }
-                <div>{deleteTask}</div>
+                    {done? '' : <div>{props.editTask}</div> }
+                <div>{props.deleteTask}</div>
             </div>
         </div>
     )

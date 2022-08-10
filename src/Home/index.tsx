@@ -6,10 +6,16 @@ import * as AlertDialog from '@radix-ui/react-alert-dialog';
 
 import './styles.css'
 
+type TaskProps = {
+  id: number;
+  name: string;
+  time: string;
+
+}
 
 export function Home() {
   const [taskName, setTaskName] = useState("")
-  const [todoTasks, setTodoTasks] = useState([])
+  const [todoTasks, setTodoTasks] = useState<TaskProps[]>([])
   const [todoId, setTodoId] = useState(0)
   const [newTaskName, setNewTaskName] = useState('')
 
@@ -35,7 +41,7 @@ export function Home() {
   }
 
 
-  function handleEditTask(name, time, id) {
+  function handleEditTask(name: string, time: string, id: number) {
     name = newTaskName
     time = new Date().toLocaleTimeString("pt-Br", {
       day: "2-digit",
@@ -55,8 +61,8 @@ export function Home() {
     }
 
     const editedTask = {
-      name: editedName,
-      time: editedTime,
+      name: editedName!,
+      time: editedTime!,
       id: id
     }
 
@@ -70,7 +76,7 @@ export function Home() {
   }
 
 
-  const handleDeleteTask = (id) => {
+  const handleDeleteTask = (id: number) => {
       //console.log(todoTasks)
       var newTaskList = todoTasks.filter((task) => task.id !== id)
       //console.log(newTaskList)
