@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Card } from "../components/Card"
+import { Card } from "../Components/Card"
 import * as Dialog from '@radix-ui/react-dialog';
 import * as AlertDialog from '@radix-ui/react-alert-dialog';
 
